@@ -5,17 +5,9 @@ ENV LANGUAGE=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 RUN apt-get update && apt-get install -y locales && locale-gen en_US.UTF-8
 
-# Colors and italics for tmux
-COPY xterm-256color-italic.terminfo /root
-RUN tic /root/xterm-256color-italic.terminfo
-ENV TERM=xterm-256color-italic
-
-RUN apt update
+RUN apt-get update
 RUN apt-get install -y sudo \
     docker.io
-
-RUN adduser --home /home/smirik --shell /bin/bash --gecos --ingroup smirik --disabled-password &&\
-    echo "smirik ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 
 RUN apt-get install -y vim \
     curl \
@@ -24,6 +16,14 @@ RUN apt-get install -y vim \
     zsh \
     mosh \
     tmux
+
+RUN adduser --home /home/smirik --shell /bin/bash --gecos --ingroup smirik --disabled-password &&\
+    echo "smirik ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+
+# Colors and italics for tmux
+COPY config/xterm-256color-italic.terminfo /home/smirik/
+RUN tic /home/smirik/xterm-256color-italic.terminfo
+ENV TERM=xterm-256color-italic
 
 RUN chsh smirik -s /usr/bin/zsh
 RUN chsh root -s /usr/bin/zsh
