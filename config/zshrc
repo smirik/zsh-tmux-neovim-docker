@@ -1,0 +1,29 @@
+export ZSH=/home/smirik/.oh-my-zsh
+ZSH_THEME="robbyrussell"
+plugins=(
+  git
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# Fortran configuration
+
+export CXX="g++"
+export CC="gcc"
+export FSFLAG=-I
+export FC="gfortran"
+
+alias sf="php bin/console"
+alias pu="php bin/phpunit"
+
+# Docker Symfony alias
+alias d.php="docker-compose exec php php"
+alias d.phpunit="docker-compose exec php php bin/phpunit"
+alias d.sh="docker-compose exec php /bin/sh"
+alias d.composer="docker-compose exec php composer"
+alias d.sf="docker-compose exec php bin/console"
+alias d.psql="docker-compose exec db psql"
+alias d.fix="docker-compose exec php vendor/bin/php-cs-fixer fix"
+alias d.phpunit="docker-compose exec php bin/phpunit"

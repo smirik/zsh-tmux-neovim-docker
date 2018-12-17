@@ -1,6 +1,4 @@
 .PHONY: build
 
 build:
-	docker build -t jannis/zsh-tmux-neovim .
-
-
+	docker run --name smirik-workspace -td smirik-workspace
